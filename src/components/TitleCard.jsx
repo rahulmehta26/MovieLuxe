@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-const TitleCard = ({ textStyle, title, titleText, isButton, isWheel }) => {
+const TitleCard = ({ textStyle, title, titleText, isButton, isWheel = false }) => {
 
   const [swiper, setSwiper] = useState(null);  
   

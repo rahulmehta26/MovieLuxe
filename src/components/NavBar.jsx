@@ -7,6 +7,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import cinema from "../assets/cinema.png";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,14 +19,25 @@ const NavBar = () => {
     className=" w-full relative "
     >
       <nav className="bg-gray-800 w-full text-white">
-        <div className="container mx-auto px-6 py-2 flex justify-between items-center">
-          <h1 className="text-[1.25rem] cursor-pointer font-semibold">
-            {" "}
-            <span className={" font-extrabold text-[2rem] text-indigo-400 "}>
-              M
-            </span>
-            ovieLuxe
-          </h1>
+        <div className="container mx-auto px-10 py-2 flex justify-between items-center">
+        <div
+            className=" flex items-center gap-x-2 "
+            >
+
+              <img 
+              src={cinema}
+              className=" size-8 mb-2 object-cover "
+              style={{ filter: 'invert(1)' }}
+              />
+              <h1 className="text-[1.25rem] cursor-pointer text-white font-semibold">
+                <span
+                  className={" font-extrabold text-[2rem] text-indigo-400 "}
+                >
+                  M
+                </span>
+                ovieLuxe
+              </h1>
+            </div>
 
           <div className="flex cursor-pointer items-center ">
             {menuData?.map((item) => {

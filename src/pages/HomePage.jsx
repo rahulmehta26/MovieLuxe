@@ -3,6 +3,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import Poster from "../components/Poster";
 import TitleCard from "../components/TitleCard";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
@@ -18,6 +19,8 @@ const HomePage = () => {
         <TitleCard title="Popular on Demand haiii" isButton={true} isWheel={false} />
 
       </div>
+
+      <Footer />
 
     </div>
   );
