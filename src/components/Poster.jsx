@@ -63,7 +63,6 @@ const Poster = () => {
         <TitleCard 
           title='Popular on MovieLuxe'
           textStyle='text-white'
-          titleText='text-white'
           isWheel={true}
           />
 

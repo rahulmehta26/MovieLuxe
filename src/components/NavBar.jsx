@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import menuData from "../constant/NavItemData";
 import {
   BellIcon,
@@ -8,36 +8,58 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import cinema from "../assets/cinema.png";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const iconCustomStyle = "size-7 text-white";
 
-  return (
-    <div
-    className=" w-full relative "
-    >
-      <nav className="bg-gray-800 w-full text-white">
-        <div className="container mx-auto px-10 py-2 flex justify-between items-center">
-        <div
-            className=" flex items-center gap-x-2 "
-            >
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
 
-              <img 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <div className=" w-full relative ">
+      <motion.nav
+        className="w-full text-white"
+        initial={{ opacity: 1, backgroundColor: "transparent" }}
+        animate={{
+          opacity: scrolled ? 1 : 0.9,
+          backgroundColor: scrolled ? "rgba(26, 29, 35, 0.9)" : "transparent",
+          backdropFilter: scrolled ? "blur(10px)" : "none",
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+        }}
+      >
+        <div className="container mx-auto px-10 py-2 flex justify-between items-center">
+          <Link to={"/"} className=" flex items-center gap-x-2 ">
+            <img
               src={cinema}
               className=" size-8 mb-2 object-cover "
-              style={{ filter: 'invert(1)' }}
-              />
-              <h1 className="text-[1.25rem] cursor-pointer text-white font-semibold">
-                <span
-                  className={" font-extrabold text-[2rem] text-indigo-400 "}
-                >
-                  M
-                </span>
-                ovieLuxe
-              </h1>
-            </div>
+              style={{ filter: "invert(1)" }}
+            />
+            <h1 className="text-[1.25rem] cursor-pointer text-white font-semibold">
+              <span className={" font-extrabold text-[2rem] text-indigo-400 "}>
+                M
+              </span>
+              ovieLuxe
+            </h1>
+          </Link>
 
           <div className="flex cursor-pointer items-center ">
             {menuData?.map((item) => {
@@ -104,7 +126,7 @@ const NavBar = () => {
             </motion.div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* <div
       className=" w-fit p-2 bg-slate-200 absolute right-0 "
