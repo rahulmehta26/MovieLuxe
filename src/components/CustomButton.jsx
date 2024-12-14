@@ -3,9 +3,11 @@
 import React from 'react';
 import {motion} from 'framer-motion'
 
-const CustomButton = ({title}) => {
+const CustomButton = ({title, type = 'submit', onClick }) => {
   return (
     <motion.button
+    type={type}
+    onClick={onClick}
     whileHover={{
       scale:1.05,
       transition:{

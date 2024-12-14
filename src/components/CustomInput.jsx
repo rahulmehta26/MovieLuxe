@@ -14,6 +14,8 @@ const CustomInput = ({
   isUser,
   isEmail,
   isPassword,
+  value,
+  onChange
 }) => {
   const iconCustomStyle = "size-6 text-black cursor-pointer ";
 
@@ -31,6 +33,8 @@ const CustomInput = ({
         placeholder={placeholder}
         className=" w-full outline-none "
         type={inputType}
+        value={value}
+        onChange={onChange}
       />
 
       {isUser && <UserIcon className={iconCustomStyle} />}

@@ -11,6 +11,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import getPopularMovies from "../utils/movieAPI";
 import cinema from "../assets/cinema.png";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import SkeletonCard from "./SkeletonCard";
 
 const TitleCard = ({
   textStyle,
@@ -22,6 +24,8 @@ const TitleCard = ({
 }) => {
   const [swiper, setSwiper] = useState(null);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handlePrev = () => {
     if (swiper) swiper.slidePrev();
@@ -34,13 +38,24 @@ const TitleCard = ({
   const customIconCircle =
     "w-9 h-9 rounded-full cursor-pointer bg-white flex justify-center items-center ";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getPopularMovies(category);
-      setData(res, "rtfyghu1212");
-    };
-    fetchData();
-  }, [category]);
+    useEffect(() => {
+      const fetchData = async () => {
+        setIsLoading(true); 
+        try {
+          const res = await getPopularMovies(category);
+          setData(res); 
+        } catch (error) {
+          return error;
+        } finally {
+          setIsLoading(false); 
+        }
+      };
+      fetchData();
+    }, [category]);
+
+  if(isLoading){
+    return <SkeletonCard />
+  }
 
   return (
     <div>
@@ -92,8 +107,17 @@ const TitleCard = ({
           return (
             <SwiperSlide key={info.id}>
               <Link to={`/video-player/${info?.id}`}>
-                <div className="w-80 relative cursor-pointer flex-shrink-0 h-52">
-                  <img
+                <motion.div 
+                className="w-80 relative cursor-pointer flex-shrink-0 h-52">
+                  <motion.img
+                  whileHover={{
+                    scale:1.15,
+                    transition: {
+                      type: "spring", 
+                      stiffness: 300,
+                      damping: 10
+                    }
+                  }}
                     src={
                       info?.backdrop_path
                         ? import.meta.env.VITE_IMG_URI + info?.backdrop_path
@@ -111,12 +135,15 @@ const TitleCard = ({
                       {info?.original_language !== "en" && ` (${info?.title})`}
                     </h3>
                   </div>
-                </div>
+                </motion.div>
               </Link>
             </SwiperSlide>
           );
         })}
       </Swiper>
+
+      {/* <SkeletonCard /> */}
+
     </div>
   );
 };
