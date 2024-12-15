@@ -4,7 +4,7 @@ async function fetchMovieApi(id) {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZGI0ZGYzNWZlMjgyZjExY2VmNGUzZjFkMDVjMDUxNiIsIm5iZiI6MTczMTg2NjkyNC4yMzYsInN1YiI6IjY3M2EzMTJjNTg1OWY5ODFlZWRmY2I3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.r_egWDJwFYbnXC99lSPiCYiwCbemcrX2G-2FrMq-Y4Q',
+      Authorization: import.meta.env.VITE_AUTH_URL,
     },
   };
 
